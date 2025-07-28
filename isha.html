@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>For Aisha ❤️</title>
+  <style>
+      body {
+      background-color: #0b0c10;
+      color: #ffffff;
+      font-family: "Courier New", monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      max-width: 90%;
+    }
+
+    .heart {
+      font-size: 3rem;
+      animation: pulse 1s infinite alternate;
+      color: #ff4d6d;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.2); }
+    }
+
+    .photo {
+      width: 200px;
+      height: 200px;
+      margin: 20px auto;
+      border-radius: 50%;
+      background: url('aisha.jpg') center/cover no-repeat;
+      box-shadow: 0 0 25px #ff4d6d;
+      transition: transform 0.3s;
+    }
+
+    .photo:hover {
+      transform: scale(1.05);
+    }
+
+    .message-box {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 15px #ff4d6d;
+      backdrop-filter: blur(6px);
+    }
+
+    .message-text {
+      font-size: 1.1rem;
+      white-space: pre-wrap;
+      animation: typing 8s steps(100, end);
+      overflow: hidden;
+      border-right: 2px solid #fff;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    .signature {
+      margin-top: 15px;
+      font-style: italic;
+      color: #ffd700;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      background: #ff4d6d;
+      color: white;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #ff1a4d;
+    }
+
+    footer {
+      margin-top: 25px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<div class="content">
+  <div class="heart">❤️</div>
+
+  <div class="photo"></div>
+
+  <div class="message-box">
+    <div class="message-text" id="loveText">
+      Aisha Ahmed Baba Kano,
+
+      You are my heartbeat, my calm, my joy, and my forever.
+
+      Your smile melts my worries.
+      Your voice brings peace to my storms.
+      Your presence is all I’ve ever wanted in this world.
+
+      If I could code love, you’d be my final commit.
+      I choose you every day, in every language, in every life.
+
+      — Modu Kunjo 💻❤️
+    </div>
+
+    <div class="signature">Click below to hear it 💬</div>
+    <button onclick="speakLove()">Speak My Heart</button>
+    <button onclick="showSurprise()">Click Me 💌</button>
+
+    <p id="surprise" style="margin-top:15px; display:none; color:#ffc0cb; font-weight:bold;"></p>
+  </div>
+ <div class="whatsapp">
+        <script>
+  function openWhatsApp() {
+    // Replace with your actual phone number (with country code, no + sign)
+    window.open("https://wa.me/2349067693094", "_blank");
+  }
+</script>
+         <button class="button" onclick="openWhatsApp()" 
+ style="background-color: #25D366;">Click to reply if you love me too ❤️</button>
+        </a>
+    </div>
+
+  <footer>
+    Handcrafted with love by Modu Kunjo
+  </footer>
+</div>
+
+<script>
+  // Heartfall effect
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let hearts = [];
+  for (let i = 0; i < 60; i++) {
+    hearts.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 12 + 5,
+      speed: Math.random() * 1 + 0.5
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    hearts.forEach(heart => {
+      ctx.beginPath();
+      ctx.fillStyle = '#ff4d6d';
+      ctx.font = `${heart.size}px serif`;
+      ctx.fillText('❤', heart.x, heart.y);
+      heart.y += heart.speed;
+      if (heart.y > canvas.height) {
+        heart.y = 0;
+        heart.x = Math.random() * canvas.width;
+      }
+    });
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+
+  // Speak the love message
+  function speakLove() {
+    const text = document.getElementById('loveText').innerText;
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-GB';
+    utterance.rate = 1;
+    speechSynthesis.speak(utterance);
+  }
+
+  // Surprise message on button click
+  function showSurprise() {
+    const messages = [
+      "You are my inspiration, Aisha 💕",
+      "Every heartbeat spells your name ❤️",
+      "You're not just beautiful — you're rare 🌹",
+      "Modu Kunjo is blessed to love you 🌙",
+      "If love is a journey, you are my destination 🛤️"
+    ];
+    const random = messages[Math.floor(Math.random() * messages.length)];
+    document.getElementById("surprise").innerText = random;
+    document.getElementById("surprise").style.display = "block";
+  }
+
+  // Resize canvas if window changes
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+</script>
+
+</body>
+</html>
